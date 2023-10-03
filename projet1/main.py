@@ -13,13 +13,8 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 SERPAPI_API_KEY = os.environ.get("SERPAPI_API_KEY")
 nubela_api_key = os.environ.get("NUBELA")
 
-
-
-if __name__ == "__main__":
-    
-    
-    linkedin_profile_url = linkedin_lookup_agent(name="louis Martin du Nord")
-    
+def ice_breaker(name:str) -> str:
+    linkedin_profile_url = linkedin_lookup_agent(name="louis Martin du Nord") 
     summary_template = """
          given the Linkedin information {information} about a person from I want you to create:
          1. a short summary
@@ -27,13 +22,14 @@ if __name__ == "__main__":
      """
     
     summary_prompt_template = PromptTemplate(input_variables=["information"], template=summary_template)
-
-    
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
-
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
-    
     linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
-    
     print(chain.run(information=linkedin_data))
    
+
+
+if __name__ == "__main__":
+    ice_breaker("Louis Martin du Nord")
+    
+    

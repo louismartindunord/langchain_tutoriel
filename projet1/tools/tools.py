@@ -6,7 +6,6 @@ import os
 class CustomSerpAPIWrapper(SerpAPIWrapper):
     def __init__(self):
         super(CustomSerpAPIWrapper, self).__init__()
-
     @staticmethod
     def _process_response(res: dict) -> str:
         """Process response from SerpAPI."""
